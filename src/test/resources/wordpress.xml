@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name ="WordPress" paralle ="false">
+    <listeners>
+        <listener class-name="common.MethodListener"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="reportConfig.ExtentReportListener"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <test name= "Run on CHROME Browser">
+        <parameter name = "browser" value = "chrome"></parameter>
+        <classes>
+            <class name="com.wordPress.Posts.Post_Admin_Create_View_Edit"></class>
+        </classes>
+    </test>
+
+    <test name= "Run on COCCOC Browser">
+        <parameter name = "browser" value = "coccoc"></parameter>
+        <classes>
+            <class name="com.wordPress.Posts.Post_Admin_Create_View_Edit"></class>
+        </classes>
+    </test>
+    <!--    <test name= "Run on FIREFOX Browser">-->
+    <!--        <parameter name = "browser" value = "firefox"></parameter>-->
+    <!--        <classes>-->
+    <!--            <class name="com.wordPress.Posts.Post_Admin_Create_View_Edit"></class>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <test name= "Run on CHROME_HEADLESS">
+        <parameter name = "browser" value = "chrome_headless"></parameter>
+        <classes>
+            <class name="com.wordPress.Posts.Post_Admin_Create_View_Edit"></class>
+        </classes>
+    </test>
+    <test name= "Run on FIREFOX_HEADLESS">
+        <parameter name = "browser" value = "firefox_headless"></parameter>
+        <classes>
+            <class name="com.wordPress.Posts.Post_Admin_Create_View_Edit"></class>
+        </classes>
+    </test>
+</suite>
