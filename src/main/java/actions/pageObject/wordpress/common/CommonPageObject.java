@@ -1,7 +1,7 @@
 package actions.pageObject.wordpress.common;
 
 
-import actions.common.AbstractTest;
+import actions.common.functionHelper.AbstractTest;
 import actions.pageObject.wordpress.Admin.DashboardPageObject;
 import actions.pageObject.wordpress.User.HomePageObject;
 import actions.pageObject.wordpress.User.SearchResultPageObject;

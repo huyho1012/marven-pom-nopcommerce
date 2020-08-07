@@ -1,7 +1,8 @@
 package actions.pageObject.wordpress.Admin;
 
+
+import actions.pageObject.wordpress.common.CommonPageObject;
 import org.openqa.selenium.WebDriver;
-import pageObject.wordpress.common.CommonPageObject;
 
 public class PagesPageObject extends CommonPageObject {
     WebDriver driver;

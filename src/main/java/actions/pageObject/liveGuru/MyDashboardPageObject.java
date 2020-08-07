@@ -1,8 +1,8 @@
 package actions.pageObject.liveGuru;
 
-import common.AbstractPage;
+import actions.common.functionHelper.AbstractPage;
+import interfaces.liveGuru.MyDashboardPageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.liveGuru.MyDashboardPageUI;
 
 public class MyDashboardPageObject extends AbstractPage {
     private final WebDriver driver;

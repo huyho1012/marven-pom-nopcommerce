@@ -1,6 +1,6 @@
 package actions.browserFactory;
 
-import actions.common.Global_Constants;
+import actions.common.functionHelper.Constants;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -19,9 +19,9 @@ public abstract class DriverManager {
         if(driver ==null){
             createDriver();
         }
-        driver.get(Global_Constants.WORD_PRESS_URL);
+        driver.get(Constants.WORD_PRESS_URL);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Global_Constants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Constants.LONG_TIMEOUT, TimeUnit.SECONDS);
         return driver;
     }
     public WebDriver getDriver(String urlLink){
@@ -30,7 +30,7 @@ public abstract class DriverManager {
         }
         driver.get(urlLink);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Global_Constants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Constants.LONG_TIMEOUT, TimeUnit.SECONDS);
         return driver;
     }
 }

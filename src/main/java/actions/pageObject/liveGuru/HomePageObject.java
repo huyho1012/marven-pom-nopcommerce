@@ -1,8 +1,9 @@
 package actions.pageObject.liveGuru;
 
-import common.AbstractPage;
+import actions.common.functionHelper.AbstractPage;
+import interfaces.liveGuru.HomePageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.liveGuru.HomePageUI;
+
 
 public class HomePageObject extends AbstractPage {
     private final WebDriver driver;

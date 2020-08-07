@@ -1,5 +1,10 @@
 package actions.browserFactory;
 
+import actions.browserFactory.Manager.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 public class BrowserDriver {
 
     public static DriverManager getBrowser(String browserName){
@@ -25,5 +30,16 @@ public class BrowserDriver {
                 break;
         }
         return driverManager;
+    }
+
+    public static class ChromeHeadlessManager extends DriverManager {
+        @Override
+        protected void createDriver() {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+            options.addArguments("window-size=1920x1080");
+            driver = new ChromeDriver(options);
+        }
     }
 }

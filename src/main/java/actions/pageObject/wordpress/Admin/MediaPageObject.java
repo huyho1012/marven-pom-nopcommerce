@@ -1,8 +1,8 @@
 package actions.pageObject.wordpress.Admin;
 
+import actions.pageObject.wordpress.common.CommonPageObject;
+import interfaces.wordPress.Admin.MediaPageUI;
 import org.openqa.selenium.WebDriver;
-import pageObject.wordpress.common.CommonPageObject;
-import pageUI.wordPress.Admin.MediaPageUI;
 
 public class MediaPageObject extends CommonPageObject {
     WebDriver driver;
@@ -11,7 +11,7 @@ public class MediaPageObject extends CommonPageObject {
     }
 
     public void clickToAddNewButton() {
-        waitForElementClickable(driver,MediaPageUI.ADD_NEW_BUTTON);
+        waitForElementClickable(driver, MediaPageUI.ADD_NEW_BUTTON);
         clickToElement(driver,MediaPageUI.ADD_NEW_BUTTON);
     }
 }

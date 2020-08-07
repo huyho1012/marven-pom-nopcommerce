@@ -1,7 +1,7 @@
 package actions.common.bankGuru;
 
 
-import actions.common.AbstractPage;
+import actions.common.functionHelper.AbstractPage;
 import interfaces.bankGuru.CustomerPageUI;
 import org.openqa.selenium.WebDriver;
 

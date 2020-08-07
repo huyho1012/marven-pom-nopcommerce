@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="actions.common.functionHelper.MethodListener"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="actions.common.reportConfig.ExtentReportListener"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <test name= "Run on CHROME Browser">
+        <parameter name = "browser" value = "chrome"></parameter>
+        <classes>
+            <class name="testcases.Nopcommerce.User.Register"></class>
+        </classes>
+    </test>
+</suite>

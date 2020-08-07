@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Run on CHROME Browser"
+           tests="2"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="40.797">
+  <properties />
+  
+  
+            <testcase name="Testcase_Post_02_EditPost_At_Admin" time="18.527" classname="testcases.wordPress.Posts.Post_Admin_Create_View_Edit" />
+                <testcase name="Testcase_Post_01_CreateNewPost_At_Admin" time="22.270" classname="testcases.wordPress.Posts.Post_Admin_Create_View_Edit" />
+      
+</testsuite>

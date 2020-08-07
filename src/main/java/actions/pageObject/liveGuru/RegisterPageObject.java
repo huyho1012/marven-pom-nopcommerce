@@ -1,8 +1,8 @@
 package actions.pageObject.liveGuru;
 
-import common.AbstractPage;
+import actions.common.functionHelper.AbstractPage;
+import interfaces.liveGuru.RegisterPageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.liveGuru.RegisterPageUI;
 
 public class RegisterPageObject extends AbstractPage {
     private final WebDriver driver;

@@ -1,8 +1,9 @@
 package actions.pageObject.liveGuru;
 
-import common.AbstractPage;
+
+import actions.common.functionHelper.AbstractPage;
+import interfaces.liveGuru.LoginPageUI;
 import org.openqa.selenium.WebDriver;
-import pageUI.liveGuru.LoginPageUI;
 
 public class LoginPageObject extends AbstractPage {
     private final WebDriver driver;
