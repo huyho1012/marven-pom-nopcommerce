@@ -145,8 +145,13 @@ public abstract class AbstractPage {
     public String getTextElement(WebDriver driver, String xpathValue){
         return findElement(driver,xpathValue).getText();
     }
-    public String getAttributeValue(WebDriver driver, String xpathValue, String attributeName){
-        return findElement(driver,xpathValue).getAttribute(attributeName);
+    public String getAttributeValue(WebDriver driver, String locator, String attributeName){
+        element = findElement(driver,locator);
+        return element.getAttribute(attributeName);
+    }
+    public String getAttributeValue(WebDriver driver, String locator, String attributeName, String... values){
+        element = findElement(driver,castToObject(locator,values));
+        return element.getAttribute(attributeName);
     }
     public String getTextElement(WebDriver driver, String locator, String... values){
             return findElement(driver,castToObject(locator, values)).getText();
@@ -177,7 +182,12 @@ public abstract class AbstractPage {
         }
     }
     public Boolean isElementSelected(WebDriver driver, String locator) {
-        return findElement(driver, locator).isSelected();
+        element = findElement(driver, locator);
+        return element.isSelected();
+    }
+    public Boolean isElementSelected(WebDriver driver, String locator, String... values) {
+        element = findElement(driver, castToObject(locator, values));
+        return element.isSelected();
     }
     public Boolean isElementEnable(WebDriver driver, String locator){
         return  findElement(driver,locator).isEnabled();

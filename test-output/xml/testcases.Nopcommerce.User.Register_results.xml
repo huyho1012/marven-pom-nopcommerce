@@ -4,9 +4,9 @@
            failures="1"
            errors="0"
            skipped="0"
-           time="11.316">
+           time="13.889">
   <properties />
-            <testcase name="TC_05_Register_With_Valid_Email" time="5.388" classname="testcases.Nopcommerce.User.Register">
+            <testcase name="TC_05_Register_With_Valid_Email" time="8.040" classname="testcases.Nopcommerce.User.Register">
                 <failure type="java.lang.AssertionError"
                   message="expected [true] but found [false]"
               >
@@ -46,7 +46,7 @@
           </testcase>
   
   
-            <testcase name="TC_04_Register_With_Password_Less_Than_6_Chars" time="3.125" classname="testcases.Nopcommerce.User.Register" />
-                <testcase name="TC_05_Register_With_ConfirmPass_Not_Same" time="2.803" classname="testcases.Nopcommerce.User.Register" />
+            <testcase name="TC_05_Register_With_ConfirmPass_Not_Same" time="2.765" classname="testcases.Nopcommerce.User.Register" />
+                <testcase name="TC_04_Register_With_Password_Less_Than_6_Chars" time="3.084" classname="testcases.Nopcommerce.User.Register" />
       
 </testsuite>

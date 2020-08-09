@@ -10,7 +10,7 @@
     <test name= "Run on CHROME Browser">
         <parameter name = "browser" value = "chrome"></parameter>
         <classes>
-            <class name="testcases.Nopcommerce.User.Register"></class>
+            <class name="testcases.Nopcommerce.User.EditMyAccount"></class>
         </classes>
     </test>
 </suite>

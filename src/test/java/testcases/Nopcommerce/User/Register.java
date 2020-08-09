@@ -1,9 +1,8 @@
 package testcases.Nopcommerce.User;
 
-import NopCommerce.Interface.RegisterPageUI;
-import NopCommerce.PageObject.HomePage;
-import NopCommerce.PageObject.PageGenratorManager;
-import NopCommerce.PageObject.RegisterPage;
+import NopCommerce.PageObject.User.UserHomePage;
+import NopCommerce.PageObject.User.PageGenratorManager;
+import NopCommerce.PageObject.User.UserRegisterPage;
 import NopCommerce.Variable;
 import actions.browserFactory.BrowserDriver;
 import actions.browserFactory.DriverManager;
@@ -19,8 +18,8 @@ public class Register extends AbstractTest {
     WebDriver driver;
     DriverManager driverManager;
     DataHelper data = DataHelper.getData();
-    HomePage homePage;
-    RegisterPage registerPage;
+    UserHomePage userHomePage;
+    UserRegisterPage userRegisterPage;
 
     String firstName,lastName,gender;
     String monthBir, dayBirth, yearBirth;
@@ -39,8 +38,8 @@ public class Register extends AbstractTest {
         email = "huyho1210"+randomNumber()+"@mailinator.com";
         driverManager = BrowserDriver.getBrowser(browserName);
         driver = driverManager.getDriver(Variable.URL_USER_PAGE);
-        homePage = PageGenratorManager.getHomepage(driver);
-        registerPage = homePage.clickRegisterButton(driver);
+        userHomePage = PageGenratorManager.getHomepage(driver);
+        userRegisterPage = userHomePage.clickRegisterButton();
     }
 //    @Test
 //    public void TC_01_Register_Empty_Data(){
@@ -96,68 +95,66 @@ public class Register extends AbstractTest {
     @Test
     public void TC_04_Register_With_Password_Less_Than_6_Chars(){
         log.info("Check Register Page display");
-        verifyTrue(registerPage.checkRegisterPageDisplay());
-        registerPage.setDelayTime(1);
+        verifyTrue(userRegisterPage.checkRegisterPageDisplay());
+        userRegisterPage.setDelayTime(1);
 
-        log.info("Click Register button ");
-
-        registerPage.chooseGender("M");
-        registerPage.enterDataToDynamicField(driver,"FirstName",firstName);
+        userRegisterPage.chooseGender("M");
+        userRegisterPage.enterDataToDynamicField(driver,"FirstName",firstName);
         System.out.println(firstName);
-        registerPage.enterDataToDynamicField(driver,"LastName", lastName);
+        userRegisterPage.enterDataToDynamicField(driver,"LastName", lastName);
         System.out.println(lastName);
-        registerPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
-        registerPage.enterDataToDynamicField(driver,"Email",email);
-        registerPage.enterDataToDynamicField(driver,"Company",companyName);
-        registerPage.enterDataToDynamicField(driver,"Password","12346");
-        registerPage.enterDataToDynamicField(driver,"ConfirmPassword","123456");
+        userRegisterPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
+        userRegisterPage.enterDataToDynamicField(driver,"Email",email);
+        userRegisterPage.enterDataToDynamicField(driver,"Company",companyName);
+        userRegisterPage.enterDataToDynamicField(driver,"Password","12346");
+        userRegisterPage.enterDataToDynamicField(driver,"ConfirmPassword","123456");
 
-        registerPage.clickRegisterButton();
-        System.out.println(registerPage.getValidateErrorMessage(driver,"Password"));
-        verifyEquals(registerPage.getValidateErrorMessage(driver,"Password"),"Password must meet the following rules:\n" +
+        userRegisterPage.clickRegisterButton();
+        System.out.println(userRegisterPage.getValidateErrorMessage(driver,"Password"));
+        verifyEquals(userRegisterPage.getValidateErrorMessage(driver,"Password"),"Password must meet the following rules:\n" +
                 "must have at least 6 characters");
     }
 
     @Test
     public void TC_05_Register_With_ConfirmPass_Not_Same(){
         log.info("Check Register Page display");
-        verifyTrue(registerPage.checkRegisterPageDisplay());
-        registerPage.setDelayTime(1);
+        verifyTrue(userRegisterPage.checkRegisterPageDisplay());
+        userRegisterPage.setDelayTime(1);
 
         log.info("Click Register button ");
 
-        registerPage.chooseGender("M");
-        registerPage.enterDataToDynamicField(driver,"FirstName",firstName);
-        registerPage.enterDataToDynamicField(driver,"LastName", lastName);
-        registerPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
-        registerPage.enterDataToDynamicField(driver,"Email",email);
-        registerPage.enterDataToDynamicField(driver,"Company",companyName);
-        registerPage.enterDataToDynamicField(driver,"Password","123456");
-        registerPage.enterDataToDynamicField(driver,"ConfirmPassword","1234567");
+        userRegisterPage.chooseGender("M");
+        userRegisterPage.enterDataToDynamicField(driver,"FirstName",firstName);
+        userRegisterPage.enterDataToDynamicField(driver,"LastName", lastName);
+        userRegisterPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
+        userRegisterPage.enterDataToDynamicField(driver,"Email",email);
+        userRegisterPage.enterDataToDynamicField(driver,"Company",companyName);
+        userRegisterPage.enterDataToDynamicField(driver,"Password","123456");
+        userRegisterPage.enterDataToDynamicField(driver,"ConfirmPassword","1234567");
 
-        registerPage.clickRegisterButton();
-        verifyEquals(registerPage.getValidateErrorMessage(driver,"ConfirmPassword"),"The password and confirmation password do not match.");
+        userRegisterPage.clickRegisterButton();
+        verifyEquals(userRegisterPage.getValidateErrorMessage(driver,"ConfirmPassword"),"The password and confirmation password do not match.");
     }
     @Test
     public void TC_05_Register_With_Valid_Email(){
         log.info("Check Register Page display");
-        verifyTrue(registerPage.checkRegisterPageDisplay());
-        registerPage.setDelayTime(1);
+        verifyTrue(userRegisterPage.checkRegisterPageDisplay());
+        userRegisterPage.setDelayTime(1);
 
         log.info("Click Register button ");
 
-        registerPage.chooseGender("M");
-        registerPage.enterDataToDynamicField(driver,"FirstName",firstName);
-        registerPage.enterDataToDynamicField(driver,"LastName", lastName);
-        registerPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
-        registerPage.enterDataToDynamicField(driver,"Email",email);
-        registerPage.enterDataToDynamicField(driver,"Company",companyName);
-        registerPage.enterDataToDynamicField(driver,"Password","123456");
-        registerPage.enterDataToDynamicField(driver,"ConfirmPassword","123456");
+        userRegisterPage.chooseGender("M");
+        userRegisterPage.enterDataToDynamicField(driver,"FirstName",firstName);
+        userRegisterPage.enterDataToDynamicField(driver,"LastName", lastName);
+        userRegisterPage.chooseBirthday(driver,"12","October","1992","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
+        userRegisterPage.enterDataToDynamicField(driver,"Email",email);
+        userRegisterPage.enterDataToDynamicField(driver,"Company",companyName);
+        userRegisterPage.enterDataToDynamicField(driver,"Password","123456");
+        userRegisterPage.enterDataToDynamicField(driver,"ConfirmPassword","123456");
 
-        registerPage.clickRegisterButton();
-        registerPage.setDelayTime(3);
-        verifyTrue(registerPage.getRegisterSuccessMessage(driver));
+        userRegisterPage.clickRegisterButton();
+        userRegisterPage.setDelayTime(3);
+        verifyTrue(userRegisterPage.getRegisterSuccessMessage(driver));
     }
 
 }
