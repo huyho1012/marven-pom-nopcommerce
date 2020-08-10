@@ -54,7 +54,7 @@ public class UserRegisterPage extends AbstractPage {
                         String lastName, String dayItem, String monthItem,
                         String yearItem, String email, String companyName,
                         String pass, String confirmPass) {
-        setDelayTime(1);
+        setDelayTime(2);
         waitForElementClickable(driver, RegisterPageUI.GENDER_OPTION, genderValue);
         clickToElement(driver, RegisterPageUI.GENDER_OPTION, genderValue);
         waitForElementsVisible(driver, RegisterPageUI.FIELD_NAME, "FirstName");

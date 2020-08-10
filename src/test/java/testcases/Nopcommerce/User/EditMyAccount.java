@@ -1,6 +1,7 @@
 package testcases.Nopcommerce.User;
 
 import NopCommerce.PageObject.User.MyAccount.UserMyAccountAddressTab;
+import NopCommerce.PageObject.User.MyAccount.UserMyAccountChangePassword;
 import NopCommerce.PageObject.User.MyAccount.UserMyAccountCustomerInfoTab;
 import NopCommerce.PageObject.User.PageGenratorManager;
 import NopCommerce.PageObject.User.UserHomePage;
@@ -25,6 +26,7 @@ public class EditMyAccount extends AbstractTest {
     UserHomePage userHomePage;
     UserRegisterPage userRegisterPage;
     UserMyAccountCustomerInfoTab myAccountCustomerInfoTab;
+    UserMyAccountChangePassword myAccountChangePassword;
     UserMyAccountAddressTab myAccountAddressTab;
     DataHelper dataHelper = DataHelper.getData();
     @Parameters("browser")
@@ -46,58 +48,67 @@ public class EditMyAccount extends AbstractTest {
         verifyTrue(userHomePage.checkLoginSuccess());
         log.info("Precondition - Step 4 - Nhấn vào xem My Account");
         myAccountCustomerInfoTab = userHomePage.clickToMyAccountLink();
-        verifyTrue(myAccountCustomerInfoTab.checkDisplayMyAccountPage());
+        verifyTrue(myAccountCustomerInfoTab.checkMyaccountCustomerInfDisplay());
     }
-//    @Test
-//    public void TC01_Edit_My_Account_Info(){
-//        log.info("Update My account Info");
-//        myAccountCustomerInfoTab.chooseGender("F");
-//        myAccountCustomerInfoTab.enterDataToDynamicField(driver,"FirstName","Automation");
-//        myAccountCustomerInfoTab.enterDataToDynamicField(driver,"LastName", "FC");
-//        myAccountCustomerInfoTab.chooseBirthday(driver,"1", "January","1999","DateOfBirthDay","DateOfBirthMonth","DateOfBirthYear");
-//        myAccountCustomerInfoTab.enterDataToDynamicField(driver,"Email",newEmail);
-//        myAccountCustomerInfoTab.enterDataToDynamicField(driver,"Company","Automation FC");
-//        log.info("Click button Save");
-//        myAccountCustomerInfoTab.clickSaveButton();
-//        log.info("Verify input");
-//        verifyTrue(myAccountCustomerInfoTab.checkGenderChosen(driver, "F"));
-//        verifyTrue(myAccountCustomerInfoTab.checkDataDisplayonDynamicField(driver,"FirstName","Automation"));
-//        verifyTrue(myAccountCustomerInfoTab.checkDataDisplayonDynamicField(driver,"LastName","FC"));
-//        verifyTrue(myAccountCustomerInfoTab.checkDataDisplayonDynamicField(driver,"Email",newEmail));
-//        verifyTrue(myAccountCustomerInfoTab.checkDataDisplayonDynamicField(driver,"Company","Automation FC"));
-//    }
+    @Test
+    public void TC01_Edit_My_Account_Info(){
+        log.info("Update My account Info");
+        myAccountCustomerInfoTab.chooseCustomerGender("F");
+        myAccountCustomerInfoTab.enterDynamicDataOnCustomerInfo("FirstName","Automation");
+        myAccountCustomerInfoTab.enterDynamicDataOnCustomerInfo("LastName", "FC");
+        myAccountCustomerInfoTab.chooseCustomerBirthday("1", "January","1999");
+        myAccountCustomerInfoTab.enterDynamicDataOnCustomerInfo("Email",newEmail);
+        myAccountCustomerInfoTab.enterDynamicDataOnCustomerInfo("Company","Automation FC");
+        log.info("Click button Save");
+        myAccountCustomerInfoTab.clickSaveButton();
+        log.info("Verify input");
+        verifyTrue(myAccountCustomerInfoTab.checkGenderChosen(driver, "F"));
+        verifyEquals(myAccountCustomerInfoTab.getDynamicDataOnCustomer("FirstName"),"Automation");
+        verifyEquals(myAccountCustomerInfoTab.getDynamicDataOnCustomer("LastName"),"FC");
+        verifyEquals(myAccountCustomerInfoTab.getDynamicDataOnCustomer("Email"),newEmail);
+        verifyEquals(myAccountCustomerInfoTab.getDynamicDataOnCustomer("Company"),"Automation FC");
+    }
     @Test
     public void TC_03_Add_address(){
         log.info("Go to Address tab");
         myAccountCustomerInfoTab.clickAddressesLink();
         myAccountAddressTab = PageGenratorManager.getMyAccountAddressTab(driver);
-        verifyTrue(myAccountAddressTab.checkAddressTabDisplay());
-        log.info("Click to add new Address");
         myAccountAddressTab.clicktoNewAddressButton();
         verifyTrue(myAccountAddressTab.checkAddNewAddressTabDisplay());
         log.info("Enter info of Address");
-        myAccountAddressTab.enterFirstName("Automation");
-        myAccountAddressTab.enterLastName("FC");
-        myAccountAddressTab.enterEmail("automationfc.vn@gmail.com");
-        myAccountAddressTab.enterCompany("Automation FC");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_FirstName","Automation");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_LastName","FC");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_Email","automationfc.vn@gmail.com");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_Company","Automation FC");
         myAccountAddressTab.selectCountry(driver,"United States");
         myAccountAddressTab.selectStateCity(driver,"Texas");
-        myAccountAddressTab.enterCity("Đà Nẵng");
-        myAccountAddressTab.enterAddress1("123/04 Lê Lai");
-        myAccountAddressTab.enterAddress2("234/05 Hải phòng");
-        myAccountAddressTab.enterZipCode("550000");
-        myAccountAddressTab.enterPhoneNumber("0123456789");
-        myAccountAddressTab.enterFaxNumber("0987654321");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_City","Đà Nẵng");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_Address1","123/04 Lê Lai");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_Address2","234/05 Hải phòng");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_ZipPostalCode","550000");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_PhoneNumber","0123456789");
+        myAccountAddressTab.enterDynamicDataOnAddress("Address_FaxNumber","0987654321");
         myAccountAddressTab.clickSaveButton();
-        verifyEquals(myAccountAddressTab.checkFullNameDisplay(driver),"Automation" + " " + "FC");
-        verifyEquals(myAccountAddressTab.checkEmailDisplay(driver),"automationfc.vn@gmail.com");
-        verifyEquals(myAccountAddressTab.checkPhoneNumber(driver),"0123456789");
-        verifyEquals(myAccountAddressTab.checkFaxNumber(driver),"0987654321");
-        verifyEquals(myAccountAddressTab.checkCompanyName(driver),"Automation FC");
-        verifyEquals(myAccountAddressTab.checkAddress1Display(driver),"123/04 Lê Lai");
-        verifyEquals(myAccountAddressTab.checkAddress2Display(driver),"234/05 Hải phòng");
-        verifyEquals(myAccountAddressTab.checkCityStateZipCodeDisplay(driver),"Đà Nẵng" +"," + " " +"Texas"+"," + " " + "550000");
-        verifyEquals(myAccountAddressTab.checkCountry(driver),"United States");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("name"),"Automation" + " " + "FC");
+        verifyEquals(myAccountAddressTab.getDataOfEmail(),"automationfc.vn@gmail.com");
+        verifyEquals(myAccountAddressTab.getDataOfPhoneNumber(),"0123456789");
+        verifyEquals(myAccountAddressTab.getDataOfTaxNumber(),"0987654321");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("company"),"Automation FC");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("address1"),"123/04 Lê Lai");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("address2"),"234/05 Hải phòng");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("city-state-zip"),"Đà Nẵng" +"," + " " +"Texas"+"," + " " + "550000");
+        verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("country"),"United States");
+    }
+    public void TC_04_Change_Password(){
+        log.info("Go to Address tab");
+        myAccountChangePassword= myAccountAddressTab.clickChangePassLink();
+        myAccountChangePassword.enterOldPassWord();
+        myAccountChangePassword.enterNewPassWord();
+        myAccountChangePassword.enterConfirmPassWord();
+        myAccountChangePassword.clickConfirmChangePass();
+        verifyTrue(myAccountChangePassword.checkChangePasswordSuccess());
+        userHomePage = myAccountChangePassword.clickButtonLogout();
+
 
     }
 }

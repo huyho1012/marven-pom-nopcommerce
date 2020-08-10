@@ -1,6 +1,8 @@
 package NopCommerce.PageObject.User.MyAccount;
 
 import NopCommerce.Interface.User.MyAccount.UserMyAccountAddressTabUI;
+import NopCommerce.Interface.User.MyAccount.UserMyAccountCustomerInfoTabUI;
+import NopCommerce.PageObject.User.PageGenratorManager;
 import actions.common.functionHelper.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
@@ -26,46 +28,9 @@ public class UserMyAccountAddressTab extends AbstractPage {
         waitForElementVisible(driver, UserMyAccountAddressTabUI.TITLE_ADD_NEW_ADDRESS_TAB);
         return isElementDisplay(driver, UserMyAccountAddressTabUI.TITLE_ADD_NEW_ADDRESS_TAB);
     }
-
-    public void enterFirstName(String firtNameAddress) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.FIRST_NAME_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.FIRST_NAME_TEXT_BOX,firtNameAddress);
-    }
-    public void enterLastName(String lastNameAddress) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.LAST_NAME_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.LAST_NAME_TEXT_BOX,lastNameAddress);
-    }
-    public void enterEmail(String emailAdress) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.EMAIL_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.EMAIL_TEXT_BOX,emailAdress);
-    }
-    public void enterCompany(String companyAddress) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.COMPANY_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.COMPANY_TEXT_BOX,companyAddress);
-    }
-    public void enterCity(String cityAddress) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.CITY_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.CITY_TEXT_BOX,cityAddress);
-    }
-    public void enterAddress1(String Address1) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.ADDRESS1_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.ADDRESS1_TEXT_BOX,Address1);
-    }
-    public void enterAddress2(String Address2) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.ADDRESS2_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.ADDRESS2_TEXT_BOX,Address2);
-    }
-    public void enterZipCode(String zipCode) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.ZIP_CODE_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.ZIP_CODE_TEXT_BOX,zipCode);
-    }
-    public void enterPhoneNumber(String phoneNumber) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.PHONE_NUMBER_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.PHONE_NUMBER_TEXT_BOX,phoneNumber);
-    }
-    public void enterFaxNumber(String taxNumber) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.FAX_NUMBER_TEXT_BOX);
-        sendKeyToElement(driver,UserMyAccountAddressTabUI.FAX_NUMBER_TEXT_BOX,taxNumber);
+    public void enterDynamicDataOnAddress(String nameTextBox, String dataValue) {
+        waitForElementVisible(driver, UserMyAccountAddressTabUI.DYNAMIC_TEXT_BOX,nameTextBox);
+        sendKeyToElement(driver,UserMyAccountAddressTabUI.DYNAMIC_TEXT_BOX,dataValue,nameTextBox);
     }
 
     public void selectCountry(WebDriver driver, String itemCountry) {
@@ -81,56 +46,35 @@ public class UserMyAccountAddressTab extends AbstractPage {
         waitForElementVisible(driver,UserMyAccountAddressTabUI.SAVE_BUTTON);
         clickToElement(driver,UserMyAccountAddressTabUI.SAVE_BUTTON);
     }
-
-    public String checkEmailDisplay(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.EMAIL_DATA_FIELD);
-        String text =  getTextElement(driver,UserMyAccountAddressTabUI.EMAIL_DATA_FIELD);
+    public String getDataOfEmail() {
+        waitForElementVisible(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"email");
+        String text =  getTextElement(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"email");
         String[] word = text.split("\\s");
         return word[1];
     }
-    public String checkFullNameDisplay(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.FULL_NAME_FILED);
-        return getTextElement(driver,UserMyAccountAddressTabUI.FULL_NAME_FILED);
-    }
 
-    public String checkPhoneNumber(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.PHONE_DATA_FIELD);
-        String text =  getTextElement(driver,UserMyAccountAddressTabUI.PHONE_DATA_FIELD);
+    public String getDataOfPhoneNumber() {
+        waitForElementVisible(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"phone");
+        String text =  getTextElement(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"phone");
         String[] word = text.split("\\s");
         System.out.println(word[2]);
         return word[2];
     }
-
-    public String checkFaxNumber(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.FAX_DATA_FIELD);
-        String text =  getTextElement(driver,UserMyAccountAddressTabUI.FAX_DATA_FIELD);
+    public String getDataOfTaxNumber() {
+        waitForElementVisible(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"fax");
+        String text =  getTextElement(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,"fax");
         String[] word = text.split("\\s");
         System.out.println(word[2]);
         return word[2];
     }
-
-    public String checkAddress1Display(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.ADDRESS1_DATA_FIELD);
-        return getTextElement(driver,UserMyAccountAddressTabUI.ADDRESS1_DATA_FIELD);
+    public String getOtherInfoIsDisplay(String nameField) {
+        waitForElementVisible(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,nameField);
+        return getTextElement(driver,UserMyAccountAddressTabUI.DATA_DISPLAY_FIELD,nameField);
     }
 
-    public String checkAddress2Display(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.ADDRESS2_DATA_FIELD);
-        return getTextElement(driver,UserMyAccountAddressTabUI.ADDRESS2_DATA_FIELD);
-    }
-
-    public String checkCityStateZipCodeDisplay(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.CITY_STATE_ZIP_FIELD);
-        return getTextElement(driver,UserMyAccountAddressTabUI.CITY_STATE_ZIP_FIELD);
-    }
-
-    public String checkCompanyName(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.COMPANY_NAME_FIELD);
-        return getTextElement(driver,UserMyAccountAddressTabUI.COMPANY_NAME_FIELD);
-    }
-
-    public String checkCountry(WebDriver driver) {
-        waitForElementVisible(driver,UserMyAccountAddressTabUI.COUNTRY_FIELD);
-        return getTextElement(driver,UserMyAccountAddressTabUI.COUNTRY_FIELD);
+    public UserMyAccountChangePassword clickChangePassLink() {
+        waitForElementClickable(driver, UserMyAccountCustomerInfoTabUI.CHANGE_PASSWORD_LINK);
+        clickToElement(driver,UserMyAccountCustomerInfoTabUI.CHANGE_PASSWORD_LINK);
+        return PageGenratorManager.getMyAccountChangePass(driver);
     }
 }

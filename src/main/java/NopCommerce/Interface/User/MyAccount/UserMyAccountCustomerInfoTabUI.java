@@ -10,5 +10,6 @@ public class UserMyAccountCustomerInfoTabUI {
     public static final String SELECTED_DAY_DROPDOWN = "//select[@name = '%s']";
 
     public static final String ADDRESSES_LINK = "//li[contains(@class,'customer-addresses')]/a";
+    public static final String CHANGE_PASSWORD_LINK = "//li[contains(@class,'change-password')]/a";
 
 }
