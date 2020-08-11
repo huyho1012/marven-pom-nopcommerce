@@ -5,6 +5,7 @@ import NopCommerce.PageObject.User.MyAccount.UserMyAccountChangePassword;
 import NopCommerce.PageObject.User.MyAccount.UserMyAccountCustomerInfoTab;
 import NopCommerce.PageObject.User.PageGenratorManager;
 import NopCommerce.PageObject.User.UserHomePage;
+import NopCommerce.PageObject.User.UserLoginPage;
 import NopCommerce.PageObject.User.UserRegisterPage;
 import NopCommerce.Variable;
 import actions.browserFactory.BrowserDriver;
@@ -20,7 +21,9 @@ public class EditMyAccount extends AbstractTest {
     String firstName,lastName;
     String email;
     String newEmail;
-
+    String password, newPassword;
+    String reviewContent ;
+    String titleReview;
     DriverManager driverManager;
     WebDriver driver;
     UserHomePage userHomePage;
@@ -28,6 +31,7 @@ public class EditMyAccount extends AbstractTest {
     UserMyAccountCustomerInfoTab myAccountCustomerInfoTab;
     UserMyAccountChangePassword myAccountChangePassword;
     UserMyAccountAddressTab myAccountAddressTab;
+    UserLoginPage userLoginPage;
     DataHelper dataHelper = DataHelper.getData();
     @Parameters("browser")
     @BeforeTest
@@ -36,6 +40,8 @@ public class EditMyAccount extends AbstractTest {
         lastName = dataHelper.getLastName();
         email = "huyho.doan" + randomNumber()+ "@mailinator.com";
         newEmail = "automationfc"+randomNumber()+".vn@gmail.com";
+        password = "123456";
+        newPassword = "654321";
 
         log.info("Precondition -  Step 1 - Khởi tạo browser");
         driverManager = BrowserDriver.getBrowser(browserName);
@@ -69,7 +75,7 @@ public class EditMyAccount extends AbstractTest {
         verifyEquals(myAccountCustomerInfoTab.getDynamicDataOnCustomer("Company"),"Automation FC");
     }
     @Test
-    public void TC_03_Add_address(){
+    public void TC_02_Add_address(){
         log.info("Go to Address tab");
         myAccountCustomerInfoTab.clickAddressesLink();
         myAccountAddressTab = PageGenratorManager.getMyAccountAddressTab(driver);
@@ -99,16 +105,43 @@ public class EditMyAccount extends AbstractTest {
         verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("city-state-zip"),"Đà Nẵng" +"," + " " +"Texas"+"," + " " + "550000");
         verifyEquals(myAccountAddressTab.getOtherInfoIsDisplay("country"),"United States");
     }
-    public void TC_04_Change_Password(){
+    @Test
+    public void TC_03_Change_Password(){
         log.info("Go to Address tab");
         myAccountChangePassword= myAccountAddressTab.clickChangePassLink();
-        myAccountChangePassword.enterOldPassWord();
-        myAccountChangePassword.enterNewPassWord();
-        myAccountChangePassword.enterConfirmPassWord();
+        myAccountChangePassword.enterOldPassWord(password);
+        myAccountChangePassword.enterNewPassWord(newPassword);
+        myAccountChangePassword.enterConfirmPassWord(newPassword);
         myAccountChangePassword.clickConfirmChangePass();
-        verifyTrue(myAccountChangePassword.checkChangePasswordSuccess());
+        verifyEquals(myAccountChangePassword.checkChangePasswordSuccess(),"Password was changed");
         userHomePage = myAccountChangePassword.clickButtonLogout();
+        userHomePage.setDelayTime(3);
+        userLoginPage = userHomePage.clickLoginIcon();
+        userLoginPage.enterDataToEmailTextBox(email);
+        userLoginPage.enterDataToPasswordTextBox(password);
+        userLoginPage.clickLoginButton();
+        verifyEquals(userLoginPage.getValidateErrLogin(),"Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found");
+        userLoginPage.setDelayTime(1);
+        userLoginPage.enterDataToEmailTextBox(newEmail);
+        userLoginPage.enterDataToPasswordTextBox(newPassword);
+        userHomePage = userLoginPage.clickLoginButton();
+        verifyTrue(userHomePage.checkLoginSuccess());
+    }
+    @Test
+    public void TC_04_Add_Review(){
+        titleReview = dataHelper.getTitle();
+        reviewContent = dataHelper.getCompanyName();
 
-
+        userHomePage.clickToProduct();
+        userHomePage.clickToAddNewReview();
+        userHomePage.setDelayTime(1);
+        userHomePage.enterTitleReview(titleReview);
+        userHomePage.enterReviewText(reviewContent);
+        userHomePage.chooseRating("2");
+        userHomePage.clickSubmitReview();
+        userHomePage.setDelayTime(1);
+        verifyEquals(userHomePage.getSuccessfullAddReview(),"Product review is successfully added.");
+        verifyTrue(userHomePage.checkTitieReviewDisplay(titleReview));
+        verifyTrue(userHomePage.checkContenReviewDisplay(reviewContent));
     }
 }

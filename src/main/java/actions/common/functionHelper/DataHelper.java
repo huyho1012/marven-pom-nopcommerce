@@ -27,5 +27,8 @@ public class DataHelper {
     public String getCompanyName(){
         return  faker.company().name();
     }
+    public String getTitle(){
+        return  faker.animal().name();
+    }
 }
 
